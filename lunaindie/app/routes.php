@@ -49,6 +49,8 @@ Route::get('/', array('uses'=>'PersonasController@inicio'));
 //**** USUARIOS CLIENTES FIN ****//
 
 //**** USUARIOS DISEÑADORES ********//
+Route::get('/soydisenador', array('before' => 'logeado', 'uses' => 'DisenoController@inicio'));
+Route::post('/registrodisenador', array('before' => 'csrf', 'uses'=>'DisenoController@registrodisenador'));
 //**** USUARIOS DISEÑADORES FIN ****//
 
 //**** CMS ********//
