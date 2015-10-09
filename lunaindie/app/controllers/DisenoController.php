@@ -58,7 +58,6 @@ class DisenoController extends BaseController {
 			$nombreDeImagen = Rand(0,9999) . $_FILES["ejemplo1"]["name"];
 	    	$target_dir = "ejemplos/";
 			$target_dir = $target_dir . basename( $nombreDeImagen);
-			
 			try{
 				move_uploaded_file($_FILES["ejemplo1"]["tmp_name"], $target_dir);
 			}catch(Exceotion $e){
