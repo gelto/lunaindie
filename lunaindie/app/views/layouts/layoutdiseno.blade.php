@@ -331,99 +331,15 @@
                     <ul class="awemenu awemenu-right">
 
                         <li class="awemenu-item">
-                            <a href="#">Clientes</a>
-
-                            <ul class="awemenu-submenu awemenu-megamenu" data-width="650px" data-animation="fadeup">
-                                <li class="awemenu-megamenu-item">
-
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Activos</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Poco frecuentes</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">Mensajes</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">56004</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">20185</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">35819</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </li>
-                            </ul>
+                            <a href="/soydisenador/mensajes">Mensajes</a>
                         </li>
 
                         <li class="awemenu-item">
-                            <a href="#">Diseñadores</a>
-
-                            <ul class="awemenu-submenu awemenu-megamenu" data-width="650px" data-animation="fadeup">
-                                <li class="awemenu-megamenu-item">
-
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Activos</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">Solicitudes</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">88</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">41</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </li>
-                            </ul>
+                            <a href="/soydisenador/inventarios">Inventarios</a>
                         </li>
 
                         <li class="awemenu-item">
-                            <a href="#">Inventarios</a>
-
-                            <ul class="awemenu-submenu awemenu-megamenu" data-width="650px" data-animation="fadeup">
-                                <li class="awemenu-megamenu-item">
-
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-lg-6 ">
-                                                <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">Activos con inventario</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Activos agotados</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Terminados</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">Subastas activas</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">Subastas terminadas</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">Solicitudes</a></li>                                                    
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">150</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">15</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">2500</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">8</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">3999</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">8</a></li>  
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </li>
-
-
-                            </ul>
+                            <a href="/soydisenador/retiros">Dinero</a>
                         </li>
 
                     </ul><!-- /.awemenu -->

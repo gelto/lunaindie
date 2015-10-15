@@ -21,7 +21,7 @@ Route::filter('logeado', function()
             Session::put('redireccion', $_SERVER['REQUEST_URI']);
         }
         
-        return Redirect::to('/inicio');
+        return Redirect::to('/');
     }
 });
 
@@ -49,7 +49,10 @@ Route::get('/', array('uses'=>'PersonasController@inicio'));
 //**** USUARIOS CLIENTES FIN ****//
 
 //**** USUARIOS DISEÑADORES ********//
-Route::get('/soydisenador', array('before' => 'logeado', 'uses' => 'DisenoController@inicio'));
+Route::get('/soydisenador', array('before' => 'logeado', 'uses' => 'DisenoController@ruteador'));
+Route::get('/soydisenador/mensajes', array('before' => 'logeado', 'uses' => 'DisenoController@mensajes'));
+Route::get('/soydisenador/inventarios', array('before' => 'logeado', 'uses' => 'DisenoController@inventarios'));
+Route::get('/soydisenador/registro', array('before' => 'logeado', 'uses' => 'DisenoController@registro'));
 Route::post('/registrodisenador', array('before' => 'csrf', 'uses'=>'DisenoController@registrodisenador'));
 //**** USUARIOS DISEÑADORES FIN ****//
 

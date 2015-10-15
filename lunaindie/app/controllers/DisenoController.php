@@ -15,17 +15,36 @@ class DisenoController extends BaseController {
 	|
 	*/
 
-	public function inicio()
+	public function ruteador()
 	{
+		$userL = Sentry::getUser();
+		
+		if($userL->banderaVendedor == 1){
+			return Redirect::to('/soydisenador/mensajes');
+		}else{
+			return Redirect::to('/soydisenador/registro');
+		}		
+	}
+
+	public function registro(){
 		$userL = Sentry::getUser();
 		$this->layout = View::make('layouts.layoutdiseno');
 		$this->layout->content = View::share(array('userL' => $userL));
+		$this->layout->content = View::make('diseno/registro');
+	}
 
-		if($userL->banderaDisenador == 1){
-			$this->layout->content = View::make('diseno/inicio');
-		}else{
-			$this->layout->content = View::make('diseno/registro');
-		}		
+	public function mensajes(){
+		$userL = Sentry::getUser();
+		$this->layout = View::make('layouts.layoutdiseno');
+		$this->layout->content = View::share(array('userL' => $userL));
+		$this->layout->content = View::make('diseno/inicio');
+	}
+
+	public function inventarios(){
+		$userL = Sentry::getUser();
+		$this->layout = View::make('layouts.layoutdiseno');
+		$this->layout->content = View::share(array('userL' => $userL));
+		$this->layout->content = View::make('diseno/inventarios');
 	}
 
 
