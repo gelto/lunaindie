@@ -50,10 +50,13 @@ Route::get('/', array('uses'=>'PersonasController@inicio'));
 
 //**** USUARIOS DISEÑADORES ********//
 Route::get('/soydisenador', array('before' => 'logeado', 'uses' => 'DisenoController@ruteador'));
-Route::get('/soydisenador/mensajes', array('before' => 'logeado', 'uses' => 'DisenoController@mensajes'));
-Route::get('/soydisenador/inventarios', array('before' => 'logeado', 'uses' => 'DisenoController@inventarios'));
+Route::get('/soydisenador/mensajes/{indice?}', array('before' => 'logeado', 'uses' => 'DisenoController@mensajes'));
+Route::get('/soydisenador/inventarios/{indice?}', array('before' => 'logeado', 'uses' => 'DisenoController@inventarios'));
 Route::get('/soydisenador/registro', array('before' => 'logeado', 'uses' => 'DisenoController@registro'));
 Route::post('/registrodisenador', array('before' => 'csrf', 'uses'=>'DisenoController@registrodisenador'));
+Route::post('/soydisenador/solicitudPrenda', array('before' => 'csrf', 'uses'=>'DisenoController@solicitudPrenda'));
+Route::post('/soydisenador/mensajenuevo', array('before' => 'csrf', 'uses'=>'DisenoController@mensajenuevo'));
+
 //**** USUARIOS DISEÑADORES FIN ****//
 
 //**** CMS ********//

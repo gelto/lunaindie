@@ -21,12 +21,13 @@ $().ready(function(){
 
 		if(typeof medidas[0] != "undefined" && typeof colores[0] != "undefined" && medidas[0] != "" && colores[0] != ""){
 			var agregar = '';
+			var c = 0;
 			for(var i=0;i<medidas.length;i++){
 				for(var j=0;j<colores.length;j++){
 					agregar += '<div class="col-md-4">';
 			                        agregar += '<div class="form-group">';
 			                            agregar += '<label>Unidades para '+medidas[i]+' - '+colores[j]+'<sup>*</sup></label>';
-			                            agregar += '<input type="text" class="form-control dark validamePrenda soloAlphaNum cantidadPrenda" name="cantidadPrenda" placeholder="0" data-tipo="texto" data-medida="'+medidas[i]+'" data-color="'+colores[j]+'" data-tipo="cantidad" data-errorcustom="La cantidad para la talla '+medidas[i]+', color '+colores[j]+' es requerida">';
+			                            agregar += '<input type="text" class="form-control dark validamePrenda soloAlphaNum cantidadPrenda'+c+'" name="cantidadPrenda#'+medidas[i]+'#'+colores[j]+'" placeholder="0" data-tipo="texto" data-medida="'+medidas[i]+'" data-color="'+colores[j]+'" data-tipo="cantidad" data-errorcustom="La cantidad para la talla '+medidas[i]+', color '+colores[j]+' es requerida">';
 			                        agregar += '</div>';
 			                    agregar += '</div>';
 				}
@@ -39,6 +40,8 @@ $().ready(function(){
 		}
 	}
 
+
+	// para marcar que ya se eligió archivo
 	$('.imagen').change(function(event){
 		var i = $(this).data('eq');
 		$('.cuadrito').eq(i).css('background-color', '#333');
@@ -64,7 +67,7 @@ $().ready(function(){
 		
 		if(debeEnviar){
 
-			$('.formaRegistroDiseno').submit();
+			$('.nuevaPrendaForm').submit();
 			
 		}
 	});
@@ -92,7 +95,8 @@ $().ready(function(){
 				res = 1;
 			}	
 		}else if(tipo == "archivo"){ 
-			if(/^[´áéíóúñüÁÉÍÓÚÜa-zA-Z0-9\.]{1,50}$/i.test(valor) && valor != ""){ 
+			console.log(valor);
+			if(/^[´áéíóúñüÁÉÍÓÚÜa-zA-Z0-9\. ]{1,200}$/i.test(valor) && valor != ""){ 
 				res = 1;
 			}	
 		}

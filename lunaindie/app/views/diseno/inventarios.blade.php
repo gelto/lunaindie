@@ -38,7 +38,7 @@ Luna Indie
 
                         <div id="ajax-message"></div>
 
-                        <form action="" method="POST"  id="contact-form">
+                        <form action="/soydisenador/solicitudPrenda" method="POST" enctype="multipart/form-data" id="contact-form" class="nuevaPrendaForm">
                             <span class="error" style="color: #ffa200;">&nbsp;</span><br><br>
                             {{Form::token()}}
 
@@ -54,11 +54,11 @@ Luna Indie
                                         <label for="categoriaPrenda">Categoría <sup>*</sup></label>
                                         <select name="categoriaPrenda" id="categoriaPrenda" class="form-control dark validamePrenda" data-tipo="select" data-errorcustom="La categoría es requerida">
                                             <option value="Selecciona una opción" >Selecciona una opción</option>
-                                            <option value="Blusas" >Blusas</option>
-                                            <option value="Pantalones" >Pantalones</option>
-                                            <option value="Chamarras" >Chamarras</option>
-                                            <option value="Abrigos" >Abrigos</option>
-                                            <option value="Ropa interior" >Ropa interior</option>
+                                            <option value="1" >Blusas</option>
+                                            <option value="2" >Pantalones</option>
+                                            <option value="3" >Chamarras</option>
+                                            <option value="4" >Abrigos</option>
+                                            <option value="5" >Ropa interior</option>
                                         </select>
                                     </div><!-- /.form-group -->
                                 </div>
@@ -94,12 +94,12 @@ Luna Indie
 
                             <div class="form-group">
                                 <label>Texto de venta (a mostrar al público)<sup>*</sup></label>
-                                <textarea name="message" class="form-control dark validamePrenda" rows="5" required data-tipo="area" data-errorcustom="La descripción al público es requerida"></textarea>
+                                <textarea name="descripcionPublico" class="form-control dark validamePrenda" rows="5" required data-tipo="area" data-errorcustom="La descripción al público es requerida"></textarea>
                             </div><!-- /.form-group -->
 
                             <div class="form-group">
                                 <label>Descripción detallada de la prenda (medidas, materiales, cuidado, puntos finos, etc)<sup>*</sup></label>
-                                <textarea name="message" class="form-control dark validamePrenda" rows="5" required data-tipo="area" data-errorcustom="La descripción detallada es requerida"></textarea>
+                                <textarea name="descripcionDetallada" class="form-control dark validamePrenda" rows="5" required data-tipo="area" data-errorcustom="La descripción detallada es requerida"></textarea>
                             </div><!-- /.form-group -->
 
 
@@ -112,7 +112,7 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Agrega imagen</span>
                                     </label>
-                                    <input id="file-input" class="validamePrenda imagen" type="file" style="display:none;" data-eq="0" data-tipo="archivo" data-errorcustom="La imagen principal es requerida"/>
+                                    <input id="file-input" name="imagenPrincipal" class="validamePrenda imagen" type="file" style="display:none;" data-eq="0" data-tipo="archivo" data-errorcustom="La imagen principal es requerida"/>
                                 </li>
                                 <li class="cuadrito">
                                     <label for="file-input2">
@@ -121,7 +121,7 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Agrega imagen</span>
                                     </label>
-                                    <input id="file-input2" class="validamePrenda imagen" type="file" style="display:none;" data-eq="1" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
+                                    <input id="file-input2" name="imagen2" class="validamePrenda imagen" type="file" style="display:none;" data-eq="1" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
                                 </li>
                                 <li class="cuadrito">
                                     <label for="file-input3">
@@ -130,7 +130,7 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Agrega imagen</span>
                                     </label>
-                                    <input id="file-input3" class="validamePrenda imagen" type="file" style="display:none;" data-eq="2" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
+                                    <input id="file-input3" name="imagen3" class="validamePrenda imagen" type="file" style="display:none;" data-eq="2" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
                                 </li>
                                 <li class="cuadrito">
                                     <label for="file-input4">
@@ -139,7 +139,7 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Agrega imagen</span>
                                     </label>
-                                    <input id="file-input4" class="validamePrenda imagen" type="file" style="display:none;" data-eq="3" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
+                                    <input id="file-input4" name="imagen4" class="validamePrenda imagen" type="file" style="display:none;" data-eq="3" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
                                 </li>
                                 <li class="cuadrito">
                                     <label for="file-input5">
@@ -148,7 +148,7 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Agrega imagen</span>
                                     </label>
-                                    <input id="file-input5" class="validamePrenda imagen" type="file" style="display:none;" data-eq="4" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
+                                    <input id="file-input5" name="imagen5" class="validamePrenda imagen" type="file" style="display:none;" data-eq="4" data-tipo="archivo" data-errorcustom="Debes subir 5 imágenes"/>
                                 </li>
                             </ul>
 
@@ -166,7 +166,7 @@ Luna Indie
             <br><br><br>    
             <div class="row">
                 <div class="col-md-12">
-                    <div class="divider horizontal">Prendas en inventario</div>
+                    <div class="divider horizontal">Prendas en inventario (haga click en la imagen para editar)</div>
                 </div>
             </div>
             <div class="row ">
@@ -179,7 +179,7 @@ Luna Indie
                 <div class="col-md-2 center" style="border: 1px solid gray;">
                     Título
                 </div>
-                <div class="col-md-5 center" style="border: 1px solid gray;">
+                <div class="col-md-4 center" style="border: 1px solid gray;">
                     Mensaje al público
                 </div>
                 <div class="col-md-1 center" style="border: 1px solid gray;">
@@ -191,95 +191,66 @@ Luna Indie
                 <div class="col-md-1 center" style="border: 1px solid gray;">
                     Unidades
                 </div>
-            </div><!-- /.row -->
-            <br>
-
-            <div class="row">
-                <div class="col-md-1 center">
-                    1015
-                </div>
-                <div class="col-md-1 center">
-                    <img src="/public/statics/template/img/samples/products/cart/1.jpg" alt="">
-                </div>
-                <div class="col-md-2 center">
-                    Blusa primavera
-                </div>
-                <div class="col-md-5">
-                    Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción 
-                </div>
-                <div class="col-md-1 center">
-                    Ch
-                </div>
-                <div class="col-md-1 center">
-                    Roja
-                </div>
-                <div class="col-md-1 center">
-                    3
+                <div class="col-md-1 center" style="border: 1px solid gray;">
+                    Estado
                 </div>
             </div><!-- /.row -->
             <br>
 
+            @for($i=$inicio*25; $i<($inicio*25+25);$i++)
+            @if(isset($misPrendas[$i]))
             <div class="row">
                 <div class="col-md-1 center">
-                    1015
+                    {{$userL->id}}_{{$misPrendas[$i]->id}}
                 </div>
                 <div class="col-md-1 center">
-                    <img src="/public/statics/template/img/samples/products/cart/1.jpg" alt="">
+                    <img src="/public/solicitudes/{{$misPrendas[$i]->imagenPrincipal[0]->nombreImagen}}" alt="">
                 </div>
                 <div class="col-md-2 center">
-                    Blusa primavera
+                    {{$misPrendas[$i]->titulo}}
                 </div>
-                <div class="col-md-5">
-                    Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción
-                </div>
-                <div class="col-md-1 center">
-                    Ch
+                <div class="col-md-4">
+                    {{$misPrendas[$i]->descripcionPublico}}
                 </div>
                 <div class="col-md-1 center">
-                    Verde
+                    @foreach($misPrendas[$i]->medidas as $medida)
+                    {{$medida->medida}}&nbsp; 
+                    @endforeach
                 </div>
                 <div class="col-md-1 center">
-                    2
+                    @foreach($misPrendas[$i]->colors as $color)
+                    {{$color->color}}&nbsp; 
+                    @endforeach
+                </div>
+                <div class="col-md-1 center">
+                    <?php $cuenta = 0; ?>
+                    @foreach($misPrendas[$i]->inventarios as $inventario)
+                    <?php 
+                        $cuenta += $inventario->cantidad;
+                    ?>
+                    @endforeach
+                    {{$cuenta}}
+                </div>
+                <div class="col-md-1 center">
+                    En revisión
                 </div>
             </div><!-- /.row -->
             <br>
-
-            <div class="row">
-                <div class="col-md-1 center">
-                    1015
-                </div>
-                <div class="col-md-1 center">
-                    <img src="/public/statics/template/img/samples/products/cart/1.jpg" alt="">
-                </div>
-                <div class="col-md-2 center">
-                    Blusa otoño
-                </div>
-                <div class="col-md-5">
-                    Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción Descripción 
-                </div>
-                <div class="col-md-1 center">
-                    Ch
-                </div>
-                <div class="col-md-1 center">
-                    Azul
-                </div>
-                <div class="col-md-1 center">
-                    3
-                </div>
-            </div><!-- /.row -->
-            <br>
+            @endif
+            @endfor
             <div class="row">
                 <div class="col-md-12 center">
                     <ul class="pagination">
-                        <li class="pagination-prev"><a href="#"><i class="icon icon-arrow-prev"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><span>...</span></li>
-                        <li><a href="#">15</a></li>
-                        <li class="pagination-next"><a href="#"><i class="icon icon-arrow-next"></i></a></li>
+                        <li @if($inicio == 0) class="active" @endif><a href="/soydisenador/inventarios/">1</a></li>
+                        @if(count($misPrendas)>25)<li @if($inicio == 1) class="active" @endif><a href="/soydisenador/inventarios/2">2</a></li>@endif
+                        @if(count($misPrendas)>50)<li @if($inicio == 2) class="active" @endif><a href="/soydisenador/inventarios/3">3</a></li>@endif
+                        @if(count($misPrendas)>75)<li @if($inicio == 3) class="active" @endif><a href="/soydisenador/inventarios/4">4</a></li>@endif
+                        @if(count($misPrendas)>100)<li @if($inicio == 4) class="active" @endif><a href="/soydisenador/inventarios/5">5</a></li>@endif
+                        @if(count($misPrendas)>125)<li @if($inicio == 5) class="active" @endif><a href="/soydisenador/inventarios/6">6</a></li>@endif
+                        @if(count($misPrendas)>150)<li @if($inicio == 6) class="active" @endif><a href="/soydisenador/inventarios/7">7</a></li>@endif
+                        @if(count($misPrendas)>175)<li @if($inicio == 7) class="active" @endif><a href="/soydisenador/inventarios/8">8</a></li>@endif
+                        @if(count($misPrendas)>200)<li @if($inicio == 8) class="active" @endif><a href="/soydisenador/inventarios/9">9</a></li>@endif
+                        @if(count($misPrendas)>225)<li @if($inicio == 9) class="active" @endif><a href="/soydisenador/inventarios/10">10</a></li>@endif
                     </ul><!-- ./pagination -->
                 </div>
             </div>

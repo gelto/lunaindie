@@ -1,0 +1,8 @@
+<?php
+
+class Inventario extends Eloquent {
+	public function prenda()
+    {
+        return $this->belongsTo('Prenda');
+    }
+}

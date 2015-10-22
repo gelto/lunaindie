@@ -1,4 +1,4 @@
-@section('title')
+10-@section('title')
 Luna Indie
 @stop
 @section('content')
@@ -107,18 +107,22 @@ Luna Indie
 
                         <div id="ajax-message"></div>
 
-                        <form action="" method="POST"  id="contact-form">
+                        <form action="/soydisenador/mensajenuevo" method="POST" enctype="multipart/form-data" id="contact-form" class="nuevoMensajeForm">
                             <span class="error" style="color: #ffa200;">&nbsp;</span><br>
                             <div class="form-group">
                                 <label for="contact-name">Nuevo mensaje</label>
-                                <textarea name="message" id="contact-message" class="form-control dark" rows="5" required></textarea>
+                                <textarea name="mensaje" class="form-control dark validameMensaje" rows="6" required data-tipo="area" data-errorcustom="Es necesario que escribas un mensaje"></textarea>
                             </div><!-- /.form-group -->
                             <ul class="list doc-icons-list">
-                                <li>
-                                    <span class="doc-list-icon">
+                                <li class="cuadrito">
+                                    <label for="file-input">
+                                        <span class="doc-list-icon">
                                         <i class="icon icon-plus"></i>
-                                    </span>
-                                    <span class="doc-list-class">Agrega imagen</span>
+                                        </span>
+                                        <span class="doc-list-class">Agrega imagen (opcional)</span>
+                                    </label>
+                                    <input id="file-input" name="imagenPrincipal" class="imagen" type="file" style="display:none;" data-eq="0" data-tipo="archivo" />
+                                    <input type="hidden" name="usuario" value="{{$userL->id}}"/>
                                 </li>
                             </ul>
 
@@ -126,7 +130,7 @@ Luna Indie
                             {{Form::token()}}
 
                             <div class="form-button">
-                                <button type="submit" class="btn btn-lg btn-dark botonEnviarRec">Enviar</button>
+                                <button type="submit" class="btn btn-lg btn-dark botonEnviarMensaje">Enviar</button>
                             </div><!-- /.form-button -->
                         </form>
 
@@ -154,53 +158,52 @@ Luna Indie
             </div><!-- /.row -->
             <br>
 
+            @for($i=$inicio*25; $i<($inicio*25+25);$i++)
+            @if(isset($mensajes[$i]))
             <div class="row">
                 <div class="col-md-1">
-                    10-Oct-15
+                    <?php $creado = explode(" ", $mensajes[$i]->created_at); ?>
+                    {{$creado[0]}}
                 </div>
                 <div class="col-md-1">
-                    Luna Indie
+                    @if($mensajes[$i]->origen == "SISTEMA")
+                    LUNA INDIE
+                    @else
+                    <?php $usuario = User::find($mensajes[$i]->user_id); ?>
+                    {{$usuario->first_name}}
+                    @endif
                 </div>
                 <div class="col-md-8">
-                    Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje 
+                    {{$mensajes[$i]->texto}}
                 </div>
                 <div class="col-md-2">
-                    &nbsp; 
+                    @if($mensajes[$i]->imagen)
+                    <img src="{{$mensajes[$i]->imagen}}"/>
+                    @else
+                    @endif
                 </div>
             </div><!-- /.row -->
             <br>
+            @endif
+            @endfor
 
             <div class="row">
-                <div class="col-md-1">
-                    10-Oct-15
+                <div class="col-md-12 center">
+                    <ul class="pagination">
+                        <li @if($inicio == 0) class="active" @endif><a href="/soydisenador/mensajes/">1</a></li>
+                        @if(count($mensajes)>25)<li @if($inicio == 1) class="active" @endif><a href="/soydisenador/mensajes/2">2</a></li>@endif
+                        @if(count($mensajes)>50)<li @if($inicio == 2) class="active" @endif><a href="/soydisenador/mensajes/3">3</a></li>@endif
+                        @if(count($mensajes)>75)<li @if($inicio == 3) class="active" @endif><a href="/soydisenador/mensajes/4">4</a></li>@endif
+                        @if(count($mensajes)>100)<li @if($inicio == 4) class="active" @endif><a href="/soydisenador/mensajes/5">5</a></li>@endif
+                        @if(count($mensajes)>125)<li @if($inicio == 5) class="active" @endif><a href="/soydisenador/mensajes/6">6</a></li>@endif
+                        @if(count($mensajes)>150)<li @if($inicio == 6) class="active" @endif><a href="/soydisenador/mensajes/7">7</a></li>@endif
+                        @if(count($mensajes)>175)<li @if($inicio == 7) class="active" @endif><a href="/soydisenador/mensajes/8">8</a></li>@endif
+                        @if(count($mensajes)>200)<li @if($inicio == 8) class="active" @endif><a href="/soydisenador/mensajes/9">9</a></li>@endif
+                        @if(count($mensajes)>225)<li @if($inicio == 9) class="active" @endif><a href="/soydisenador/mensajes/10">10</a></li>@endif
+                        
+                    </ul><!-- ./pagination -->
                 </div>
-                <div class="col-md-1">
-                    Zamitis
-                </div>
-                <div class="col-md-8">
-                    Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje 
-                </div>
-                <div class="col-md-2">
-                    &nbsp; 
-                </div>
-            </div><!-- /.row -->
-            <br>
-
-            <div class="row">
-                <div class="col-md-1">
-                    10-Oct-15
-                </div>
-                <div class="col-md-1">
-                    Luna Indie
-                </div>
-                <div class="col-md-8">
-                    Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje Mensaje 
-                </div>
-                <div class="col-md-2">
-                    &nbsp; 
-                </div>
-            </div><!-- /.row -->
-            <br>
+            </div>
         </div><!-- /.container -->
     </div><!-- /.margin-bottom-100 -->
 
@@ -211,6 +214,11 @@ Luna Indie
             </div>
 
 @stop 
+
+
+@section('scripts')
+<script src="/public/statics/js/mensajenuevo.js"></script>
+@stop
 
 
 

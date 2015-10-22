@@ -13,7 +13,8 @@ $().ready(function(){
 		$(this).val($(this).val().replace(/´i$/gi , "í"));
 		$(this).val($(this).val().replace(/´o$/gi , "ó"));
 		$(this).val($(this).val().replace(/´u$/gi , "ú"));
-        $(this).val($(this).val().replace(/[^´áéíóúÁÉÍÓÚa-zA-Z\u00D1\u00F1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC ]/gi , ""));
+				
+        $(this).val($(this).val().replace(/[^´a-zA-Z\u00D1\u00F1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC ]/gi , ""));
     });
 
     // solo mail
