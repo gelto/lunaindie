@@ -51,16 +51,20 @@ Route::get('/', array('uses'=>'PersonasController@inicio'));
 //**** USUARIOS DISEÑADORES ********//
 Route::get('/soydisenador', array('before' => 'logeado', 'uses' => 'DisenoController@ruteador'));
 Route::get('/soydisenador/mensajes/{indice?}', array('before' => 'logeado', 'uses' => 'DisenoController@mensajes'));
-Route::get('/soydisenador/inventarios/{indice?}', array('before' => 'logeado', 'uses' => 'DisenoController@inventarios'));
+Route::get('/soydisenador/inventarios/{indice?}/{edicion_id?}', array('before' => 'logeado', 'uses' => 'DisenoController@inventarios'));
 Route::get('/soydisenador/registro', array('before' => 'logeado', 'uses' => 'DisenoController@registro'));
 Route::post('/registrodisenador', array('before' => 'csrf', 'uses'=>'DisenoController@registrodisenador'));
 Route::post('/soydisenador/solicitudPrenda', array('before' => 'csrf', 'uses'=>'DisenoController@solicitudPrenda'));
+Route::post('/soydisenador/edicionPrenda', array('before' => 'csrf', 'uses'=>'DisenoController@edicionPrenda'));
 Route::post('/soydisenador/mensajenuevo', array('before' => 'csrf', 'uses'=>'DisenoController@mensajenuevo'));
 
 //**** USUARIOS DISEÑADORES FIN ****//
 
 //**** CMS ********//
-Route::get('/gelto', array('uses' => 'AdminsController@inicio'));
+Route::get('/soyadministrador', array('before' => 'logeado', 'uses' => 'AdminsController@inicio'));
+Route::get('/soyadministrador/mensajes/{indice?}/{user_id?}', array('before' => 'logeado', 'uses' => 'AdminsController@mensajes'));
+Route::post('/soyadministrador/mensajenuevo', array('before' => 'csrf', 'uses'=>'AdminsController@mensajenuevo'));
+Route::get('/soyadministrador/inventarios/{indice?}/{edicion_id?}', array('before' => 'logeado', 'uses' => 'AdminsController@inventarios'));
 //**** CMS FIN ****//
 
 //**** TONTERIAS ********//

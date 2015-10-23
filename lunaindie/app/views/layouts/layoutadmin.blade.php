@@ -96,9 +96,6 @@
                                             </div>
 
                                             <ul>
-                                                <li><a href="/micuenta">Mi cuenta</a></li>
-                                                <li><a href="/soydisenador">Entra como diseñador</a></li>
-                                                <li><a href="/cambia password">Cambiar contraseña</a></li>
                                                 <li><a href="/logout">Logout</a></li>
                                             </ul>
                                             
@@ -389,7 +386,7 @@
                         </li>
 
                         <li class="awemenu-item">
-                            <a href="#">Inventarios</a>
+                            <a href="/soyadministrador/inventarios">Inventarios</a>
 
                             <ul class="awemenu-submenu awemenu-megamenu" data-width="650px" data-animation="fadeup">
                                 <li class="awemenu-megamenu-item">

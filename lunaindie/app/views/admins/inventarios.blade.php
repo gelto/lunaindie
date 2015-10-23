@@ -276,7 +276,7 @@ Luna Indie
             <br><br><br>    
             <div class="row">
                 <div class="col-md-12">
-                    <div class="divider horizontal">Prendas en inventario (haga click en la imagen para editar)</div>
+                    <div class="divider horizontal">Prendas solicitadas</div>
                 </div>
             </div>
             <div class="row ">
@@ -308,33 +308,33 @@ Luna Indie
             <br>
 
             @for($i=$inicio*25; $i<($inicio*25+25);$i++)
-            @if(isset($misPrendas[$i]))
+            @if(isset($prendasSolicitadas[$i]))
             <div class="row">
                 <div class="col-md-1 center">
-                    {{$userL->id}}_{{$misPrendas[$i]->id}}
+                    {{$prendasSolicitadas[$i]->user_id}}_{{$prendasSolicitadas[$i]->id}}
                 </div>
                 <div class="col-md-1 center">
-                    <a href="/soydisenador/inventarios/{{$inicio+1}}/{{$misPrendas[$i]->id}}" ><img src="/public/solicitudes/{{$misPrendas[$i]->imagenPrincipal[0]->nombreImagen}}" alt=""></a>
+                    <a href="/soydisenador/inventarios/{{$inicio+1}}/{{$prendasSolicitadas[$i]->id}}" ><img src="/public/solicitudes/{{$prendasSolicitadas[$i]->imagenPrincipal[0]->nombreImagen}}" alt=""></a>
                 </div>
                 <div class="col-md-2 center">
-                    {{$misPrendas[$i]->titulo}}
+                    {{$prendasSolicitadas[$i]->titulo}}
                 </div>
                 <div class="col-md-4">
-                    {{$misPrendas[$i]->descripcionPublico}}
+                    {{$prendasSolicitadas[$i]->descripcionPublico}}
                 </div>
                 <div class="col-md-1 center">
-                    @foreach($misPrendas[$i]->medidas as $medida)
+                    @foreach($prendasSolicitadas[$i]->medidas as $medida)
                     {{$medida->medida}}&nbsp; 
                     @endforeach
                 </div>
                 <div class="col-md-1 center">
-                    @foreach($misPrendas[$i]->colors as $color)
+                    @foreach($prendasSolicitadas[$i]->colors as $color)
                     {{$color->color}}&nbsp; 
                     @endforeach
                 </div>
                 <div class="col-md-1 center">
                     <?php $cuenta = 0; ?>
-                    @foreach($misPrendas[$i]->inventarios as $inventario)
+                    @foreach($prendasSolicitadas[$i]->inventarios as $inventario)
                     <?php 
                         $cuenta += $inventario->cantidad;
                     ?>
@@ -348,19 +348,20 @@ Luna Indie
             <br>
             @endif
             @endfor
+
             <div class="row">
                 <div class="col-md-12 center">
                     <ul class="pagination">
                         <li @if($inicio == 0) class="active" @endif><a href="/soydisenador/inventarios/">1</a></li>
-                        @if(count($misPrendas)>25)<li @if($inicio == 1) class="active" @endif><a href="/soydisenador/inventarios/2">2</a></li>@endif
-                        @if(count($misPrendas)>50)<li @if($inicio == 2) class="active" @endif><a href="/soydisenador/inventarios/3">3</a></li>@endif
-                        @if(count($misPrendas)>75)<li @if($inicio == 3) class="active" @endif><a href="/soydisenador/inventarios/4">4</a></li>@endif
-                        @if(count($misPrendas)>100)<li @if($inicio == 4) class="active" @endif><a href="/soydisenador/inventarios/5">5</a></li>@endif
-                        @if(count($misPrendas)>125)<li @if($inicio == 5) class="active" @endif><a href="/soydisenador/inventarios/6">6</a></li>@endif
-                        @if(count($misPrendas)>150)<li @if($inicio == 6) class="active" @endif><a href="/soydisenador/inventarios/7">7</a></li>@endif
-                        @if(count($misPrendas)>175)<li @if($inicio == 7) class="active" @endif><a href="/soydisenador/inventarios/8">8</a></li>@endif
-                        @if(count($misPrendas)>200)<li @if($inicio == 8) class="active" @endif><a href="/soydisenador/inventarios/9">9</a></li>@endif
-                        @if(count($misPrendas)>225)<li @if($inicio == 9) class="active" @endif><a href="/soydisenador/inventarios/10">10</a></li>@endif
+                        @if(count($prendasActivas)>25)<li @if($inicio == 1) class="active" @endif><a href="/soydisenador/inventarios/2">2</a></li>@endif
+                        @if(count($prendasActivas)>50)<li @if($inicio == 2) class="active" @endif><a href="/soydisenador/inventarios/3">3</a></li>@endif
+                        @if(count($prendasActivas)>75)<li @if($inicio == 3) class="active" @endif><a href="/soydisenador/inventarios/4">4</a></li>@endif
+                        @if(count($prendasActivas)>100)<li @if($inicio == 4) class="active" @endif><a href="/soydisenador/inventarios/5">5</a></li>@endif
+                        @if(count($prendasActivas)>125)<li @if($inicio == 5) class="active" @endif><a href="/soydisenador/inventarios/6">6</a></li>@endif
+                        @if(count($prendasActivas)>150)<li @if($inicio == 6) class="active" @endif><a href="/soydisenador/inventarios/7">7</a></li>@endif
+                        @if(count($prendasActivas)>175)<li @if($inicio == 7) class="active" @endif><a href="/soydisenador/inventarios/8">8</a></li>@endif
+                        @if(count($prendasActivas)>200)<li @if($inicio == 8) class="active" @endif><a href="/soydisenador/inventarios/9">9</a></li>@endif
+                        @if(count($prendasActivas)>225)<li @if($inicio == 9) class="active" @endif><a href="/soydisenador/inventarios/10">10</a></li>@endif
                     </ul><!-- ./pagination -->
                 </div>
             </div>

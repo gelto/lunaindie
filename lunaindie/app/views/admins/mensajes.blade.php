@@ -97,17 +97,18 @@ Luna Indie
                 </div><!-- /.col-md-12 -->
             </div><!-- /.row -->
             <br><br>
+            @if($user_id != 0)
             <div class="row">
                 <div class="col-md-12">
                     <div class="contact-content">
                         <div class="contact-form-heading">
                             <h2>Mensajes</h2>
-                            <p>Comunícate con nosotros</p>
+                            <p>Envía un mensaje al usuario {{$user_id}}</p>
                         </div><!-- /.contact-content -->
 
                         <div id="ajax-message"></div>
 
-                        <form action="/soydisenador/mensajenuevo" method="POST" enctype="multipart/form-data" id="contact-form" class="nuevoMensajeForm">
+                        <form action="/soyadministrador/mensajenuevo" method="POST" enctype="multipart/form-data" id="contact-form" class="nuevoMensajeForm">
                             <span class="error" style="color: #ffa200;">&nbsp;</span><br>
                             <div class="form-group">
                                 <label for="contact-name">Nuevo mensaje</label>
@@ -122,7 +123,7 @@ Luna Indie
                                         <span class="doc-list-class">Agrega imagen (opcional)</span>
                                     </label>
                                     <input id="file-input" name="imagenPrincipal" class="imagen" type="file" style="display:none;" data-eq="0" data-tipo="archivo" />
-                                    <input type="hidden" name="usuario" value="{{$userL->id}}"/>
+                                    <input type="hidden" name="usuario" value="{{$user_id}}"/>
                                 </li>
                             </ul>
 
@@ -137,6 +138,9 @@ Luna Indie
                     </div>
                 </div><!-- /.col-md-12 -->
             </div><!-- /.row -->
+            @endif
+
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="divider horizontal">Historial</div>
@@ -170,7 +174,7 @@ Luna Indie
                     LUNA INDIE
                     @else
                     <?php $usuario = User::find($mensajes[$i]->user_id); ?>
-                    {{$usuario->first_name}}
+                    <a href="/soyadministrador/mensajes/0/{{$usuario->id}}" >{{$usuario->first_name}}</a>
                     @endif
                 </div>
                 <div class="col-md-7 ">
@@ -190,16 +194,16 @@ Luna Indie
             <div class="row">
                 <div class="col-md-12 center">
                     <ul class="pagination">
-                        <li @if($inicio == 0) class="active" @endif><a href="/soydisenador/mensajes/">1</a></li>
-                        @if(count($mensajes)>25)<li @if($inicio == 1) class="active" @endif><a href="/soydisenador/mensajes/2">2</a></li>@endif
-                        @if(count($mensajes)>50)<li @if($inicio == 2) class="active" @endif><a href="/soydisenador/mensajes/3">3</a></li>@endif
-                        @if(count($mensajes)>75)<li @if($inicio == 3) class="active" @endif><a href="/soydisenador/mensajes/4">4</a></li>@endif
-                        @if(count($mensajes)>100)<li @if($inicio == 4) class="active" @endif><a href="/soydisenador/mensajes/5">5</a></li>@endif
-                        @if(count($mensajes)>125)<li @if($inicio == 5) class="active" @endif><a href="/soydisenador/mensajes/6">6</a></li>@endif
-                        @if(count($mensajes)>150)<li @if($inicio == 6) class="active" @endif><a href="/soydisenador/mensajes/7">7</a></li>@endif
-                        @if(count($mensajes)>175)<li @if($inicio == 7) class="active" @endif><a href="/soydisenador/mensajes/8">8</a></li>@endif
-                        @if(count($mensajes)>200)<li @if($inicio == 8) class="active" @endif><a href="/soydisenador/mensajes/9">9</a></li>@endif
-                        @if(count($mensajes)>225)<li @if($inicio == 9) class="active" @endif><a href="/soydisenador/mensajes/10">10</a></li>@endif
+                        <li @if($inicio == 0) class="active" @endif><a href="/soyadministrador/mensajes/0/{{$user_id}}">1</a></li>
+                        @if(count($mensajes)>25)<li @if($inicio == 1) class="active" @endif><a href="/soyadministrador/mensajes/2/{{$user_id}}">2</a></li>@endif
+                        @if(count($mensajes)>50)<li @if($inicio == 2) class="active" @endif><a href="/soyadministrador/mensajes/3/{{$user_id}}">3</a></li>@endif
+                        @if(count($mensajes)>75)<li @if($inicio == 3) class="active" @endif><a href="/soyadministrador/mensajes/4/{{$user_id}}">4</a></li>@endif
+                        @if(count($mensajes)>100)<li @if($inicio == 4) class="active" @endif><a href="/soyadministrador/mensajes/5/{{$user_id}}">5</a></li>@endif
+                        @if(count($mensajes)>125)<li @if($inicio == 5) class="active" @endif><a href="/soyadministrador/mensajes/6/{{$user_id}}">6</a></li>@endif
+                        @if(count($mensajes)>150)<li @if($inicio == 6) class="active" @endif><a href="/soyadministrador/mensajes/7/{{$user_id}}">7</a></li>@endif
+                        @if(count($mensajes)>175)<li @if($inicio == 7) class="active" @endif><a href="/soyadministrador/mensajes/8/{{$user_id}}">8</a></li>@endif
+                        @if(count($mensajes)>200)<li @if($inicio == 8) class="active" @endif><a href="/soyadministrador/mensajes/9/{{$user_id}}">9</a></li>@endif
+                        @if(count($mensajes)>225)<li @if($inicio == 9) class="active" @endif><a href="/soyadministrador/mensajes/10/{{$user_id}}">10</a></li>@endif
                         
                     </ul><!-- ./pagination -->
                 </div>

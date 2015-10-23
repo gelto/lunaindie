@@ -4,6 +4,12 @@ class Prenda extends Eloquent {
     public function imagenPrincipal(){
         return $this->hasMany('Imagenesporprenda', 'prenda_id', 'id');
     }
+    public function imagenes(){
+        return $this->hasMany('Imagenesporprenda', 'prenda_id', 'id');
+    }
+    public function categoria(){
+        return $this->belongsTo('Categoria', 'categoria_id', 'id');
+    }
     public function usuario()
     {
         return $this->belongsTo('User', 'user_id');
