@@ -26,10 +26,12 @@ class AdminsController extends BaseController {
 		$this->layout = View::make('layouts.layoutadmin');
 		$this->layout->content = View::share(array('userL' => $userL));
 
-		$mensajesSinLeer = Mensaje::where('status', '=', 'SINLEER')->where('origen', '=', 'USUARIO')->take(250)->get();
+		$mensajesSinLeer = Mensaje::where('origen', '=', 'USUARIO')->orderBy('status', 'DESC')->orderBy('id', 'DESC')->take(250)->get();
 		if($user_id > 0){
-			$mensajesSinLeer = Mensaje::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->take(250)->get();
+			$mensajesSinLeer = Mensaje::where('user_id', '=', $user_id)->orderBy('status', 'DESC')->orderBy('id', 'DESC')->take(250)->get();
 		}
+
+
 		if($indice > 0){
 			$indice -= 1;
 		}
@@ -77,7 +79,17 @@ class AdminsController extends BaseController {
 		    $mensaje->origen = "ADMINISTRADOR";
 		    $mensaje->save();
 
-		    return Redirect::to('soydisenador/mensajes/');
+		    // quita el sin leer a los mensajes de ese usuario
+		    $todosLosMensajes = Mensaje::where('user_id', '=', $usuario->id)
+		    								->where('created_at', '<', $mensaje->created_at)
+		    								->where('status', '=', 'SINLEER')
+		    								->get();
+		    foreach($todosLosMensajes as $mensajeLocal){
+		    	$mensajeLocal->status = "CONTESTADO";
+		    	$mensajeLocal->save();
+		    }
+
+		    return Redirect::to('soyadministrador/mensajes/');
 
 		}else{
 			echo "obvio si valió todo";
@@ -86,43 +98,59 @@ class AdminsController extends BaseController {
 	}
 
 
-	public function inventarios($indice = 0, $edicion_id = 0){
+	public function inventarios($modo = "", $indice = 0, $edicion_id = 0){
 		$userL = Sentry::getUser();
-		$this->layout = View::make('layouts.layoutdiseno');
+		$this->layout = View::make('layouts.layoutadmin');
 		$this->layout->content = View::share(array('userL' => $userL));
 
-		$prendasSolicitadas = Prenda::where('status', '=', 'SOLICITADA')->take(1000)->get();
-		$prendasEnEsperaDeInventario = Prenda::where('status', '=', 'ENESPERA')->take(1000)->get();
-		$prendasActivas = Prenda::where('status', '=', 'ACTIVA')->take(1000)->get();
-
-		if($edicion_id != 0){
-			Session::put('edicion_id',$edicion_id); // esta sesión se va a comprobar cuando se envíe
-
-			$prendaEditar = Prenda::where('user_id', '=', $userL->id)
-									->where('status', '!=', 'RECHAZADA')
-									->where('id', '=', $edicion_id)
-									->take(1)->get();
-
-									//return $prendaEditar[0]->categoria->descripcion;
-			if(isset($prendaEditar[0])){
-				if($indice > 0){
-					$indice -= 1;
-				}
-				$this->layout->content = View::make('admins/inventarios')->with('misPrendas', $misPrendas)->with('inicio', $indice)->with('prendaEditar', $prendaEditar[0]);
-			}else{
-				return Redirect::to('/soyadministrador/inventarios/'.$indice.'/'.$edicion_id);
-			}
-		}else{
-			if($indice > 0){
-				$indice -= 1;
-			}
-			$this->layout->content = View::make('admins/inventarios')
-									->with('prendasSolicitadas', $prendasSolicitadas)
-									->with('prendasEnEsperaDeInventario', $prendasEnEsperaDeInventario)
-									->with('prendasActivas', $prendasActivas)->with('inicio', $indice);
+		if($indice > 0){
+			$indice -= 1;
 		}
 
-		
+		if($edicion_id != 0){
+
+			Session::put('edicion_id',$edicion_id); // esta sesión se va a comprobar cuando se envíe
+			$prendaEditar = Prenda::find($edicion_id);
+			$prendas = Prenda::where('user_id', '=', $prendaEditar->user_id)->get();
+
+			if(isset($prendaEditar)){
+				$this->layout->content = View::make('admins/inventarios')->with('prendas', $prendas)->with('modoTitulo', 'PRENDA')->with('inicio', $indice)->with('prendaEditar', $prendaEditar);
+			}else{
+				return Redirect::to('/soyadministrador/inventarios/prenda/'.$indice.'/'.$edicion_id);
+			}
+		}else{
+			if($modo == "activos"){
+				$prendas = Prenda::where('status', '=', 'ACTIVA')->take(1000)->get();
+				$modoTitulo = "ACTIVAS";
+			}
+			if($modo == "agotados"){
+				$prendas = Prenda::where('status', '=', 'AGOTADA')->take(1000)->get();
+				$modoTitulo = "AGOTADAS";
+			}
+			if($modo == "rechazados"){
+				$prendas = Prenda::where('status', '=', 'RECHAZADA')->take(1000)->get();
+				$modoTitulo = "RECHAZADAS";
+			}
+			if($modo == "subastas"){
+				$prendas = Prenda::where('status', '=', 'SUBASTA')->take(1000)->get();
+				$modoTitulo = "SUBASTANDOSE";
+			}
+			if($modo == "subastasterminadas"){
+				$prendas = Prenda::where('status', '=', 'SUBASTATERMINADA')->take(1000)->get();
+				$modoTitulo = "SUBASTAS AGOTADAS";
+			}
+			if($modo == "solicitudes"){
+				$prendas = Prenda::where('status', '=', 'SOLICITADA')->take(1000)->get();
+				$modoTitulo = "SOLICITADAS";
+			}
+
+			$this->layout->content = View::make('admins/inventarios')
+									->with('prendas', $prendas)
+									->with('modoTitulo', $modoTitulo)
+									->with('inicio', $indice);
+			
+		}
+
 	}
 
 }

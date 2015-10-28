@@ -328,6 +328,10 @@
                     <ul class="awemenu awemenu-right">
 
                         <li class="awemenu-item">
+                            <a href="/soyadministrador/mensajes">Mensajes</a>
+                        </li>
+
+                        <li class="awemenu-item">
                             <a href="#">Clientes</a>
 
                             <ul class="awemenu-submenu awemenu-megamenu" data-width="650px" data-animation="fadeup">
@@ -386,7 +390,7 @@
                         </li>
 
                         <li class="awemenu-item">
-                            <a href="/soyadministrador/inventarios">Inventarios</a>
+                            <a href="/soyadministrador/inventarios/solicitudes">Inventarios</a>
 
                             <ul class="awemenu-submenu awemenu-megamenu" data-width="650px" data-animation="fadeup">
                                 <li class="awemenu-megamenu-item">
@@ -395,23 +399,23 @@
                                         <div class="row">
                                             <div class="col-lg-6 ">
                                                 <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">Activos con inventario</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Activos agotados</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">Terminados</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">Subastas activas</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">Subastas terminadas</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">Solicitudes</a></li>                                                    
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/activos">Activos con inventario</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/agotados">Activos agotados</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/terminados">Rechazados</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/subastas">Subastas activas</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/subastasterminadas">Subastas terminadas</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/solicitudes">Solicitudes</a></li>                                                    
                                                 </ul>
                                             </div>
 
                                             <div class="col-lg-6">
                                                 <ul class="list-unstyled">
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">150</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">15</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-alert.html">2500</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">8</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-background.html">3999</a></li>
-                                                    <li class="awemenu-item"><a href="./elements-bar.html">8</a></li>  
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/activos">{{count($activos)}}</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/agotados">{{count($agotados)}}</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/terminados">{{count($rechazados)}}</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/subastas">{{count($subastas)}}</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/subastasterminadas">{{count($subastasterminadas)}}</a></li>
+                                                    <li class="awemenu-item"><a href="/soyadministrador/inventarios/solicitudes">{{count($solicitudes)}}</a></li>  
                                                 </ul>
                                             </div>
                                         </div>

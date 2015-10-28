@@ -5,4 +5,5 @@ class Medida extends Eloquent {
     {
         return $this->belongsTo('Prenda');
     }
+
 }

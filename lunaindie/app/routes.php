@@ -61,10 +61,36 @@ Route::post('/soydisenador/mensajenuevo', array('before' => 'csrf', 'uses'=>'Dis
 //**** USUARIOS DISEÑADORES FIN ****//
 
 //**** CMS ********//
+Route::filter('inventariosYsubastas', function()
+{
+    $solicitudes = Prenda::where('status', '=', 'SOLICITADA')->get();
+    View::share(array('solicitudes' => $solicitudes));
+
+    // inventarios activos
+    $activos = Prenda::where('status', '=', 'ACTIVO')->get();
+    View::share(array('activos' => $activos));
+
+    // inventarios activo agotados
+    $agotados = Prenda::where('status', '=', 'AGOTADO')->get();
+    View::share(array('agotados' => $agotados));
+
+    // inventarios rechazados
+    $rechazados = Prenda::where('status', '=', 'RECHAZADO')->get();
+    View::share(array('rechazados' => $rechazados));
+
+    // subastas
+    $subastas = Prenda::where('status', '=', 'SUBASTA')->get();
+    View::share(array('subastas' => $subastas));
+
+    // isubastas terminadas
+    $subastasterminadas = Prenda::where('status', '=', 'SUBASTATERMINADA')->get();
+    View::share(array('subastasterminadas' => $subastasterminadas));
+
+});
 Route::get('/soyadministrador', array('before' => 'logeado', 'uses' => 'AdminsController@inicio'));
-Route::get('/soyadministrador/mensajes/{indice?}/{user_id?}', array('before' => 'logeado', 'uses' => 'AdminsController@mensajes'));
+Route::get('/soyadministrador/mensajes/{indice?}/{user_id?}', array('before' => 'logeado', 'before' => 'inventariosYsubastas', 'uses' => 'AdminsController@mensajes'));
 Route::post('/soyadministrador/mensajenuevo', array('before' => 'csrf', 'uses'=>'AdminsController@mensajenuevo'));
-Route::get('/soyadministrador/inventarios/{indice?}/{edicion_id?}', array('before' => 'logeado', 'uses' => 'AdminsController@inventarios'));
+Route::get('/soyadministrador/inventarios/{modo}/{indice?}/{edicion_id?}', array('before' => 'logeado', 'before' => 'inventariosYsubastas', 'uses' => 'AdminsController@inventarios'));
 //**** CMS FIN ****//
 
 //**** TONTERIAS ********//

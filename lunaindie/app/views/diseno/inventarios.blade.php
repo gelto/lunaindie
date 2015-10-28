@@ -51,8 +51,15 @@ Luna Indie
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Categoría<sup>*</sup></label>
-                                        <input type="text" class="form-control dark" value="{{$prendaEditar->categoria->descripcion}}" readonly>
+                                        <label for="categoriaPrenda">Categoría <sup>*</sup></label>
+                                        <select name="categoriaPrenda" id="categoriaPrenda" class="form-control dark validamePrenda" data-tipo="select" data-errorcustom="La categoría es requerida">
+                                            <option value="Selecciona una opción" >Selecciona una opción</option>
+                                            <option value="1" @if($prendaEditar->categoria->id == 1) selected @endif >Blusas</option>
+                                            <option value="2" @if($prendaEditar->categoria->id == 2) selected @endif>Pantalones</option>
+                                            <option value="3" @if($prendaEditar->categoria->id == 3) selected @endif>Chamarras</option>
+                                            <option value="4" @if($prendaEditar->categoria->id == 4) selected @endif>Abrigos</option>
+                                            <option value="5" @if($prendaEditar->categoria->id == 5) selected @endif>Ropa interior</option>
+                                        </select>
                                     </div><!-- /.form-group -->
                                 </div>
                                 <div class="col-md-4">

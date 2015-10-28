@@ -147,13 +147,16 @@ Luna Indie
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-1 center" style="border: 1px solid gray;">
+                    Status
+                </div>
                 <div class="col-md-2 center" style="border: 1px solid gray;">
                     Fecha
                 </div>
                 <div class="col-md-2 center" style="border: 1px solid gray;">
                     Remitente
                 </div>
-                <div class="col-md-7 center" style="border: 1px solid gray;">
+                <div class="col-md-6 center" style="border: 1px solid gray;">
                     Mensaje
                 </div>
                 <div class="col-md-1 center" style="border: 1px solid gray;">
@@ -165,6 +168,9 @@ Luna Indie
             @for($i=$inicio*25; $i<($inicio*25+25);$i++)
             @if(isset($mensajes[$i]))
             <div class="row">
+                <div class="col-md-1 center">
+                    {{$mensajes[$i]->status}}
+                </div>
                 <div class="col-md-2 center">
                     <?php $creado = explode(" ", $mensajes[$i]->created_at); ?>
                     {{$creado[0]}}
@@ -177,7 +183,7 @@ Luna Indie
                     <a href="/soyadministrador/mensajes/0/{{$usuario->id}}" >{{$usuario->first_name}}</a>
                     @endif
                 </div>
-                <div class="col-md-7 ">
+                <div class="col-md-6 ">
                     {{$mensajes[$i]->texto}}
                 </div>
                 <div class="col-md-1 center">
