@@ -153,4 +153,243 @@ class AdminsController extends BaseController {
 
 	}
 
+	public function edicionPrenda(){
+
+		$userL = Sentry::getUser();
+
+		Validator::extend('alpha_spaces', function($attribute, $value)
+		{
+			return preg_match('/^[;):)\@\#\%\=\!\¡\¿\?\+\-\*\/\,\$\.\pL\s0-9]+$/u', $value);
+		});
+
+		$tiutloPrenda = Input::get('tiutloPrenda');
+		$idPrenda = Input::get('idPrenda');
+		$precioPrenda = Input::get('precioPrenda');
+		$categoriaPrenda = Input::get('categoriaPrenda');
+		$descripcionPublico = Input::get('descripcionPublico');
+		$descripcionDetallada = Input::get('descripcionDetallada');
+
+
+		$rules = array(
+	        'tiutloPrenda' => array('required', 'alpha_spaces', 'min:1', 'max:150'),
+	        'precioPrenda' => array('required', 'numeric'),
+	        'idPrenda' => array('required', 'numeric'),
+	        'categoriaPrenda' => array('required', 'numeric'),
+	        'descripcionPublico' => array('required', 'alpha_spaces', 'min:1', 'max:5000'),
+	        'descripcionDetallada' => array('required', 'alpha_spaces', 'min:1', 'max:5000'),
+	    );
+
+	    $validation = Validator::make(Input::all(), $rules);
+
+	    $edicion_id = Session::get('edicion_id');
+
+	    $thisPrenda = Prenda::find($edicion_id);
+
+	    foreach($thisPrenda->medidas as $medidaLocal){
+	    	$aux = Input::get('medidaPrenda#'.$medidaLocal->id);
+	    	$medidaLocal->medida = $aux;
+	    	$medidaLocal->save();
+	    }
+
+	    foreach($thisPrenda->colors as $colorLocal){
+    		$aux = Input::get('colorPrenda#'.$colorLocal->id);
+	    	$colorLocal->color = $aux;
+	    	$colorLocal->save();
+    	}
+
+	    foreach($thisPrenda->medidas as $medidaLocal){
+	    	foreach($thisPrenda->colors as $colorLocal){
+	    		$aux = Input::get("cantidadPrenda#".$medidaLocal->id."#".$colorLocal->id);
+	    		$cantidad = Inventario::where('medida_id', '=', $medidaLocal->id)->where('color_id', '=', $colorLocal->id)->get();
+	    		$cantidad[0]->cantidad = $aux;
+	    		$cantidad[0]->save();
+	    	}
+	    }
+
+	    if(!$validation->fails()){
+			if(isset($_FILES["imagenPrincipal"]["tmp_name"])){
+				if($_FILES["imagenPrincipal"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagenPrincipal"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagenPrincipal"]["tmp_name"], $target_dir);	
+					$nombre1 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen2"]["tmp_name"])){
+		    	if($_FILES["imagen2"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen2"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen2"]["tmp_name"], $target_dir);	
+					$nombre2 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen3"]["tmp_name"])){
+		    	if($_FILES["imagen3"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen3"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen3"]["tmp_name"], $target_dir);	
+					$nombre3 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen4"]["tmp_name"])){
+		    	if($_FILES["imagen4"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen4"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen4"]["tmp_name"], $target_dir);	
+					$nombre4 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen5"]["tmp_name"])){
+		    	if($_FILES["imagen5"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen5"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen5"]["tmp_name"], $target_dir);	
+					$nombre5 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen6"]["tmp_name"])){
+		    	if($_FILES["imagen6"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen6"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen6"]["tmp_name"], $target_dir);	
+					$nombre6 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen7"]["tmp_name"])){
+		    	if($_FILES["imagen7"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen7"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen7"]["tmp_name"], $target_dir);	
+					$nombre7 = $nombreDeImagen;
+				}
+		    }
+
+		    if(isset($_FILES["imagen8"]["tmp_name"])){
+		    	if($_FILES["imagen8"]["tmp_name"] != ""){
+					$nombreDeImagen = $userL->id . "_" . Rand(0,9999) . $_FILES["imagen8"]["name"];
+			    	$target_dir = "solicitudes/";
+					$target_dir = $target_dir . basename( $nombreDeImagen);
+					move_uploaded_file($_FILES["imagen8"]["tmp_name"], $target_dir);	
+					$nombre8 = $nombreDeImagen;
+				}
+		    }
+
+		 	$huboCambio = false; 
+
+		    // se ajusta la prenda
+		    if( $thisPrenda->titulo != $tiutloPrenda ||
+		    	$thisPrenda->categoria_id != $categoriaPrenda ||
+		    	$thisPrenda->precio != $precioPrenda ||
+		    	$thisPrenda->descripcionPublico != $descripcionPublico ||
+		    	$thisPrenda->descripcionDetallada != $descripcionDetallada )
+		    {
+
+		    	$thisPrenda->titulo = $tiutloPrenda;
+			    $thisPrenda->precio = $precioPrenda;
+			    $thisPrenda->categoria_id = $categoriaPrenda;
+			    $thisPrenda->descripcionPublico = $descripcionPublico;
+			    $thisPrenda->descripcionDetallada = $descripcionDetallada;
+			    $thisPrenda->save();
+			    $huboCambio = true;
+
+		    }
+
+		    if(isset($nombre1)){
+		    	$estaImagen = $thisPrenda->imagenes[0];
+		    	$estaImagen->nombreImagen = $nombre1;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre2)){
+		    	$estaImagen = $thisPrenda->imagenes[1];
+		    	$estaImagen->nombreImagen = $nombre2;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre3)){
+		    	$estaImagen = $thisPrenda->imagenes[2];
+		    	$estaImagen->nombreImagen = $nombre3;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre4)){
+		    	$estaImagen = $thisPrenda->imagenes[3];
+		    	$estaImagen->nombreImagen = $nombre4;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre5)){
+		    	$estaImagen = $thisPrenda->imagenes[4];
+		    	$estaImagen->nombreImagen = $nombre5;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre6)){
+		    	if(isset($thisPrenda->imagenes[5])){
+		    		$estaImagen = $thisPrenda->imagenes[5];
+		    	}else{
+		    		$estaImagen = new Imagenesporprenda();
+		    		$estaImagen->prenda_id = $thisPrenda->id;
+		    	}
+		    	
+		    	$estaImagen->nombreImagen = $nombre6;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre7)){
+		    	if(isset($thisPrenda->imagenes[6])){
+		    		$estaImagen = $thisPrenda->imagenes[6];
+		    	}else{
+		    		$estaImagen = new Imagenesporprenda();
+		    		$estaImagen->prenda_id = $thisPrenda->id;
+		    	}
+		    	$estaImagen->nombreImagen = $nombre7;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+
+		    if(isset($nombre8)){
+		    	if(isset($thisPrenda->imagenes[7])){
+		    		$estaImagen = $thisPrenda->imagenes[7];
+		    	}else{
+		    		$estaImagen = new Imagenesporprenda();
+		    		$estaImagen->prenda_id = $thisPrenda->id;
+		    	}
+		    	$estaImagen->nombreImagen = $nombre8;
+		    	$estaImagen->save();
+		    	$huboCambio = true;
+		    }
+		    	    
+
+		    //TODO enviar mail
+
+		    return Redirect::to('/soyadministrador/inventarios/prenda/1/'.$thisPrenda->user_id);
+
+		}else{
+			echo "obvio si valió todo";
+		}
+
+		
+
+	}
+
 }

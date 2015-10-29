@@ -91,6 +91,7 @@ Route::get('/soyadministrador', array('before' => 'logeado', 'uses' => 'AdminsCo
 Route::get('/soyadministrador/mensajes/{indice?}/{user_id?}', array('before' => 'logeado', 'before' => 'inventariosYsubastas', 'uses' => 'AdminsController@mensajes'));
 Route::post('/soyadministrador/mensajenuevo', array('before' => 'csrf', 'uses'=>'AdminsController@mensajenuevo'));
 Route::get('/soyadministrador/inventarios/{modo}/{indice?}/{edicion_id?}', array('before' => 'logeado', 'before' => 'inventariosYsubastas', 'uses' => 'AdminsController@inventarios'));
+Route::post('/soyadministrador/edicionPrenda', array('before' => 'csrf', 'uses'=>'AdminsController@edicionPrenda'));
 //**** CMS FIN ****//
 
 //**** TONTERIAS ********//

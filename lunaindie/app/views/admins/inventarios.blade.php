@@ -51,14 +51,10 @@ Luna Indie
                             </span>
                         </div><!-- /.product-stars -->
 
-                        <div class="product-description">
-                            <p>Lo que el siseñador dice de si mismo</p>
-                        </div><!-- /.product-description -->
-
                         <div class="product-actions-wrapper">
                             
                             <div class="product-list-actions">
-                                <button class="btn btn-lg btn-primary" >Enviar mensaje</button>
+                                <button class="btn btn-lg btn-primary enviarMensaje" data-disenador="{{$prendaEditar->usuario->id}}">Enviar mensaje</button>
                             </div><!-- /.product-list-actions -->
                         </div><!-- /.product-actions-wrapper -->
 
@@ -213,7 +209,7 @@ Luna Indie
                             <ul class="list doc-icons-list">
                                 
                                 <li class="cuadrito">
-                                    <label for="file-input">
+                                    <label for="file-input6">
                                         <span class="doc-list-icon">
                                         @if(isset($prendaEditar->imagenes[5]))
                                         <img src="/public/solicitudes/{{$prendaEditar->imagenes[5]->nombreImagen}}" />
@@ -223,10 +219,10 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Imagen de calidad</span>
                                     </label>
-                                    <input id="file-input" name="imagen6" class=" imagen" type="file" style="display:none;" data-eq="0" data-tipo="archivo" data-errorcustom="imagen1 de sistema"/>
+                                    <input id="file-input6" name="imagen6" class=" imagen" type="file" style="display:none;" data-eq="5" data-tipo="archivo" data-errorcustom="imagen1 de sistema"/>
                                 </li>
                                 <li class="cuadrito">
-                                    <label for="file-input2">
+                                    <label for="file-input7">
                                         <span class="doc-list-icon">
                                         @if(isset($prendaEditar->imagenes[6]))
                                         <img src="/public/solicitudes/{{$prendaEditar->imagenes[6]->nombreImagen}}" />
@@ -236,10 +232,10 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Imagen de calidad</span>
                                     </label>
-                                    <input id="file-input2" name="imagen7" class=" imagen" type="file" style="display:none;" data-eq="1" data-tipo="archivo" data-errorcustom="imagen2 de sistema"/>
+                                    <input id="file-input7" name="imagen7" class=" imagen" type="file" style="display:none;" data-eq="6" data-tipo="archivo" data-errorcustom="imagen2 de sistema"/>
                                 </li>
                                 <li class="cuadrito">
-                                    <label for="file-input3">
+                                    <label for="file-input8">
                                         <span class="doc-list-icon">
                                         @if(isset($prendaEditar->imagenes[7]))
                                         <img src="/public/solicitudes/{{$prendaEditar->imagenes[7]->nombreImagen}}" />
@@ -249,7 +245,7 @@ Luna Indie
                                         </span>
                                         <span class="doc-list-class">Imagen de calidad</span>
                                     </label>
-                                    <input id="file-input3" name="imagen8" class=" imagen" type="file" style="display:none;" data-eq="2" data-tipo="archivo" data-errorcustom="imagen3 de sistema"/>
+                                    <input id="file-input8" name="imagen8" class=" imagen" type="file" style="display:none;" data-eq="7" data-tipo="archivo" data-errorcustom="imagen3 de sistema"/>
                                 </li>
                             </ul>
 
@@ -257,7 +253,7 @@ Luna Indie
                             {{Form::token()}}
 
                             <div class="form-button">
-                                <button type="submit" class="btn btn-lg btn-dark enviarSolicitud">Enviar</button>
+                                <button type="submit" class="btn btn-lg btn-dark enviarAjuste">Enviar</button>
                             </div><!-- /.form-button -->
                         </form>
 
@@ -370,7 +366,7 @@ Luna Indie
 @stop 
 
 @section('scripts')
-    <script src="/public/statics/js/admin/editarprenda.js"></script>
+    <script src="/public/statics/js/admins/editarprenda.js"></script>
 @stop
 
 
