@@ -177,9 +177,10 @@ Luna Indie
                     {{$mensajes[$i]->texto}}
                 </div>
                 <div class="col-md-1 center">
-                    @if($mensajes[$i]->imagen)
+                    @if($mensajes[$i]->imagen != "")
                     <img src="{{$mensajes[$i]->imagen}}"/>
                     @else
+                    &nbsp;
                     @endif
                 </div>
             </div><!-- /.row -->

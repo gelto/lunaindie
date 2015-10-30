@@ -12,6 +12,8 @@
 */
 
 
+
+
 //**** USUARIOS CLIENTES ********//
 Route::filter('logeado', function()
 {
@@ -143,5 +145,182 @@ Route::get('/ccc', function()
 
 });
 //**** TONTERIAS FIN ****//
+
+
+//**** PAYPAL ****//
+
+Route::get('/curlchafa', function(){
+	
+
+    $message = "client_credentials";
+     
+    // Set POST variables
+    $url = 'https://api.sandbox.paypal.com/v1/oauth2/token';
+     
+    $fields = array(
+                    'data'              => array( "grant_type" => $message ),
+                    );
+     
+    $headers = array(
+                        "Accept: application/json",
+                        "Accept-Language: en_US"
+                    );
+
+    $user_agent = array(
+                        "EOJ2S-Z6OoN_le_KS1d75wsZ6y0SFdVsY9183IvxFyZp: EClusMEUk8e9ihI7ZdVLF5cZ6y0SFdVsY9183IvxFyZp"
+                    );
+     
+    
+    // Open connection
+    $ch = curl_init();
+     
+    // Set the url, number of POST vars, POST data
+    curl_setopt( $ch, CURLOPT_URL, $url );
+     
+    curl_setopt( $ch, CURLOPT_POST, true );
+    curl_setopt( $ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt( $ch, CURLOPT_USERAGENT, $user_agent);
+    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+     
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, json_encode( $fields ) );
+     
+    // Execute post
+    $result = curl_exec($ch);
+     
+    // Close connection
+    curl_close($ch);
+
+    return $result;
+});
+
+Route::get('/curl', function(){
+    $ch = curl_init();
+    $clientId = "AdZJlOhgLPBVOLIu5lHWucN3NbGR8KAIQvD7gOkzNIHJxQIIRcSMn53vrbnVUZG5X7B1ht46krtEjq-9";
+    $secret = "EIMFQEF70CDiBuVCCuwhkLsQADxVMxSkdQtPBX5u4ZMpCdOAvaHYq7kDp_0LXZsVZLyvoGU2ouJ-WCdP";
+
+    
+
+    curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/oauth2/token");
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_USERPWD, $clientId.":".$secret);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+
+    $result = curl_exec($ch);
+
+    if(empty($result))die("Error: No response.");
+    else
+    {
+        $json = json_decode($result);
+        print_r($json->access_token);
+    }
+
+    curl_close($ch);
+});
+
+Route::get('/curlcall', function(){
+    $ch = curl_init();
+    $token = "A101.0LQQfb5im4Gj-H7Y3RWX4-medJvrpslplZVUmM0OEudWr-4PkXnmwqjr9cvA-7dh._KPCc0NwV50kwwem1lP-dwdynpS";
+    $clientId = "AdZJlOhgLPBVOLIu5lHWucN3NbGR8KAIQvD7gOkzNIHJxQIIRcSMn53vrbnVUZG5X7B1ht46krtEjq-9";
+    $secret = "EIMFQEF70CDiBuVCCuwhkLsQADxVMxSkdQtPBX5u4ZMpCdOAvaHYq7kDp_0LXZsVZLyvoGU2ouJ-WCdP";
+
+    $headers = array(
+                        "Content-Type: application/json",
+                        "Authorization: Bearer A101.0LQQfb5im4Gj-H7Y3RWX4-medJvrpslplZVUmM0OEudWr-4PkXnmwqjr9cvA-7dh._KPCc0NwV50kwwem1lP-dwdynpS"
+                    );
+
+    $fields = array(    "intent" => "sale",
+                        "redirect_urls" => array(   "return_url"=>"http://example.com/your_redirect_url.html",
+                                                    "cancel_url"=>"http://example.com/your_cancel_url.html" ),
+                        "payer" => array("payment_method"=>"paypal"),
+                        "transactions" => array("amount"=>array("total"=>"7.47",
+                                                                "currency"=>"USD"))
+
+                    );
+
+    $fields2 = json_decode('{  "intent":"sale",  "redirect_urls":{    "return_url":"http://example.com/your_redirect_url.html",    "cancel_url":"http://example.com/your_cancel_url.html"  },  "payer":{    "payment_method":"paypal"  },  "transactions":[    {      "amount":{        "total":"7.47",        "currency":"USD"      }    }  ]}', true);
+
+    
+
+    curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/payments/payment");
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_USERPWD, $clientId.":".$secret);
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, json_encode( $fields2 ) );
+
+    $result = curl_exec($ch);
+
+    if(empty($result))die("Error: No response.");
+    else
+    {
+        /*return $result;
+        $json = json_decode($result);
+        print_r($json->access_token);*/
+    }
+
+    curl_close($ch);
+});
+
+Route::get('/curlcall2', function(){
+    $ch = curl_init();
+    $token = "A101.0LQQfb5im4Gj-H7Y3RWX4-medJvrpslplZVUmM0OEudWr-4PkXnmwqjr9cvA-7dh._KPCc0NwV50kwwem1lP-dwdynpS";
+    $clientId = "AdZJlOhgLPBVOLIu5lHWucN3NbGR8KAIQvD7gOkzNIHJxQIIRcSMn53vrbnVUZG5X7B1ht46krtEjq-9";
+    $secret = "EIMFQEF70CDiBuVCCuwhkLsQADxVMxSkdQtPBX5u4ZMpCdOAvaHYq7kDp_0LXZsVZLyvoGU2ouJ-WCdP";
+
+    $headers = array(
+                        "Content-Type: application/json",
+                        "Authorization: Bearer A101.0LQQfb5im4Gj-H7Y3RWX4-medJvrpslplZVUmM0OEudWr-4PkXnmwqjr9cvA-7dh._KPCc0NwV50kwwem1lP-dwdynpS"
+                    );
+
+    $fields = array(    "intent" => "sale",
+                        "redirect_urls" => array(   "return_url"=>"http://lunaindie.local/paypalback1",
+                                                    "cancel_url"=>"http://lunaindie.local/paypalback2" ),
+                        "payer" => array("payment_method"=>"paypal"),
+                        "transactions" => array("amount"=>array("total"=>"7.47",
+                                                                "currency"=>"USD"))
+
+                    );
+
+    $fields2 = json_decode('{  "intent":"sale",  "redirect_urls":{    "return_url":"http://example.com/your_redirect_url.html",    "cancel_url":"http://example.com/your_cancel_url.html"  },  "payer":{    "payment_method":"paypal"  },  "transactions":[    {      "amount":{        "total":"7.47",        "currency":"USD"      }    }  ]}', true);
+
+    
+
+    curl_setopt($ch, CURLOPT_URL, "https://api.sandbox.paypal.com/v1/payments/payment");
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_USERPWD, $clientId.":".$secret);
+    curl_setopt( $ch, CURLOPT_POSTFIELDS, json_encode( $fields2 ) );
+
+    $result = curl_exec($ch);
+
+    if(empty($result))die("Error: No response.");
+    else
+    {
+        return $result;
+        $json = json_decode($result);
+        print_r($json->access_token);
+    }
+
+    curl_close($ch);
+});
+
+Route::get('/paypalback1', function(){
+    return "hola";
+});
+Route::get('/paypalback2', function(){
+    return "hola";
+});
+Route::get('paypaltest', array('uses' => 'PaypalController@inicio'));
+			
+
+//**** PAYPAL FIN ****//
 
 

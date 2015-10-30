@@ -23,7 +23,6 @@ $().ready(function(){
 
 		
 		if(debeEnviar){
-			alert("aquí ya va a enviar");
 			$('.nuevaPrendaForm').submit();
 		}
 	});

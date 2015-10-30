@@ -249,6 +249,23 @@ Luna Indie
                                 </li>
                             </ul>
 
+                            <div class="row medidas">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="statusPrenda">Status <sup>*</sup></label>
+                                        <select name="statusPrenda" id="statusPrenda" class="form-control dark validamePrenda" data-tipo="select" data-errorcustom="La categoría es requerida">
+                                            <option value="SOLICITADA" @if($prendaEditar->status == 'SOLICITADA') selected @endif >SOLICITADA</option>
+                                            <option value="CONTROLDECALIDAD" @if($prendaEditar->status == 'CONTROLDECALIDAD') selected @endif>CONTROLDECALIDAD</option>
+                                            <option value="ACTIVA" @if($prendaEditar->status == 'ACTIVA') selected @endif>ACTIVA</option>
+                                            <option value="AGOTADA" @if($prendaEditar->status == 'AGOTADA') selected @endif>AGOTADA</option>
+                                            <option value="RECHAZADA" @if($prendaEditar->status == 'RECHAZADA') selected @endif>RECHAZADA</option>
+                                            <option value="SUBASTA" @if($prendaEditar->status == 'SUBASTA') selected @endif>SUBASTA</option>
+                                            <option value="SUBASTATERMINADA" @if($prendaEditar->status == 'SUBASTATERMINADA') selected @endif>SUBASTATERMINADA</option>
+                                        </select>
+                                    </div><!-- /.form-group -->
+                                </div>                           
+                            </div>
+
 
                             {{Form::token()}}
 
@@ -256,6 +273,12 @@ Luna Indie
                                 <button type="submit" class="btn btn-lg btn-dark enviarAjuste">Enviar</button>
                             </div><!-- /.form-button -->
                         </form>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                
+                            </div>
+                        </div>
 
                     </div>
                 </div><!-- /.col-md-12 -->

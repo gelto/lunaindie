@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'contacto@amigos.cash', 'name' => 'Amigos Cash'),
+	'from' => array('address' => 'contacto@lunaindie.com', 'name' => 'Amigos Cash'),
 
 	/*
 	|--------------------------------------------------------------------------

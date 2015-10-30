@@ -140,7 +140,7 @@ class AdminsController extends BaseController {
 				$modoTitulo = "SUBASTAS AGOTADAS";
 			}
 			if($modo == "solicitudes"){
-				$prendas = Prenda::where('status', '=', 'SOLICITADA')->take(1000)->get();
+				$prendas = Prenda::where('status', '=', 'SOLICITADA')->orwhere('status', '=', 'CONTROLDECALIDAD')->take(1000)->get();
 				$modoTitulo = "SOLICITADAS";
 			}
 
@@ -168,6 +168,7 @@ class AdminsController extends BaseController {
 		$categoriaPrenda = Input::get('categoriaPrenda');
 		$descripcionPublico = Input::get('descripcionPublico');
 		$descripcionDetallada = Input::get('descripcionDetallada');
+		$statusPrenda = Input::get('statusPrenda');
 
 
 		$rules = array(
@@ -293,6 +294,7 @@ class AdminsController extends BaseController {
 		    if( $thisPrenda->titulo != $tiutloPrenda ||
 		    	$thisPrenda->categoria_id != $categoriaPrenda ||
 		    	$thisPrenda->precio != $precioPrenda ||
+		    	$thisPrenda->status != $statusPrenda ||
 		    	$thisPrenda->descripcionPublico != $descripcionPublico ||
 		    	$thisPrenda->descripcionDetallada != $descripcionDetallada )
 		    {
@@ -300,6 +302,7 @@ class AdminsController extends BaseController {
 		    	$thisPrenda->titulo = $tiutloPrenda;
 			    $thisPrenda->precio = $precioPrenda;
 			    $thisPrenda->categoria_id = $categoriaPrenda;
+			    $thisPrenda->status = $statusPrenda;
 			    $thisPrenda->descripcionPublico = $descripcionPublico;
 			    $thisPrenda->descripcionDetallada = $descripcionDetallada;
 			    $thisPrenda->save();

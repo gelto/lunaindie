@@ -19,7 +19,7 @@ class DisenoController extends BaseController {
 	{
 		$userL = Sentry::getUser();
 		
-		if($userL->banderaVendedor == 1){
+		if($userL->banderaVendedor != 0){
 			return Redirect::to('/soydisenador/mensajes');
 		}else{
 			return Redirect::to('/soydisenador/registro');
